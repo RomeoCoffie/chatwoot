@@ -11,13 +11,12 @@ envVarGroups:
         value: production
       - key: INSTALLATION_ENV
         value: docker
-      - key: FRONTEND_URL                # e.g., https://support.yourdomain.com
+      - key: FRONTEND_URL                
         sync: false
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: RAILS_LOG_TO_STDOUT
         value: "true"
-      # Email (optional; add if you want outbound mail / email channel)
       - key: MAILER_SENDER_EMAIL
         sync: false
       - key: SMTP_ADDRESS
@@ -32,7 +31,6 @@ envVarGroups:
         value: "plain"
       - key: SMTP_ENABLE_STARTTLS_AUTO
         value: "true"
-      # File storage: keep it all on Render with a persistent disk
       - key: ACTIVE_STORAGE_SERVICE
         value: local
 
@@ -44,17 +42,14 @@ services:
   - type: keyvalue
     name: chatwoot-redis
     plan: free
-    ipAllowList: []  # internal only
+    ipAllowList: []  
 
   - type: web
     name: chatwoot-web
     runtime: docker
     plan: starter
-    # Uses the repo's Dockerfile by default
     healthCheckPath: /
-    # Run DB create/migrate/seed each deploy (safe re-run)
     preDeployCommand: bash -lc "bundle exec rails db:chatwoot_prepare"
-    # Start Puma, bind to $PORT
     dockerCommand: bash -lc "/app/docker/entrypoints/rails.sh && bundle exec rails s -p $PORT -b 0.0.0.0"
     envVars:
       - fromGroup: chatwoot-common
@@ -69,8 +64,8 @@ services:
           property: connectionString
     disk:
       name: chatwoot-uploads
-      mountPath: /app/storage   # Chatwoot local ActiveStorage path
-      sizeGB: 5                 # adjust as needed
+      mountPath: /app/storage   
+      sizeGB: 5                 
 
   - type: worker
     name: chatwoot-worker
