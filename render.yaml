@@ -47,7 +47,10 @@ services:
     plan: starter
     healthCheckPath: /
     preDeployCommand: "bundle exec rails db:chatwoot_prepare"
-    dockerCommand: sh -lc "/app/docker/entrypoints/rails.sh && bundle exec rails s -p $PORT -b 0.0.0.0"
+    dockerCommand:
+      - /bin/sh
+      - -lc
+      - /app/docker/entrypoints/rails.sh && bundle exec rails s -p $PORT -b 0.0.0.0
     envVars:
       - fromGroup: chatwoot-common
       - key: DATABASE_URL
@@ -68,7 +71,10 @@ services:
     name: chatwoot-worker
     runtime: docker
     plan: starter
-    dockerCommand: sh -lc "/app/docker/entrypoints/rails.sh && bundle exec sidekiq -C config/sidekiq.yml"
+    dockerCommand:
+      - /bin/sh
+      - -lc
+      - /app/docker/entrypoints/rails.sh && bundle exec sidekiq -C config/sidekiq.yml
     envVars:
       - fromGroup: chatwoot-common
       - key: DATABASE_URL
