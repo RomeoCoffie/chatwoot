@@ -1,7 +1,6 @@
 # render.yaml
 previews:
   generation: manual
-
 envVarGroups:
   - name: chatwoot-common
     envVars:
@@ -33,17 +32,14 @@ envVarGroups:
         value: "true"
       - key: ACTIVE_STORAGE_SERVICE
         value: local
-
 databases:
   - name: chatwoot-db
     plan: free
-
 services:
   - type: keyvalue
     name: chatwoot-redis
     plan: free
     ipAllowList: []  
-
   - type: web
     name: chatwoot-web
     runtime: docker
@@ -66,7 +62,6 @@ services:
       name: chatwoot-uploads
       mountPath: /app/storage   
       sizeGB: 5                 
-
   - type: worker
     name: chatwoot-worker
     runtime: docker
