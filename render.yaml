@@ -1,5 +1,4 @@
-previews:
-  generation: manual
+# render.yaml  (no previews block)
 envVarGroups:
   - name: chatwoot-common
     envVars:
@@ -9,7 +8,7 @@ envVarGroups:
         value: production
       - key: INSTALLATION_ENV
         value: docker
-      - key: FRONTEND_URL                
+      - key: FRONTEND_URL
         sync: false
       - key: SECRET_KEY_BASE
         generateValue: true
@@ -31,14 +30,17 @@ envVarGroups:
         value: "true"
       - key: ACTIVE_STORAGE_SERVICE
         value: local
+
 databases:
   - name: chatwoot-db
-    plan: free
+    plan: free         # you can change to starter later
+
 services:
   - type: keyvalue
     name: chatwoot-redis
     plan: free
-    ipAllowList: []  
+    ipAllowList: []
+
   - type: web
     name: chatwoot-web
     runtime: docker
@@ -59,8 +61,9 @@ services:
           property: connectionString
     disk:
       name: chatwoot-uploads
-      mountPath: /app/storage   
-      sizeGB: 5                 
+      mountPath: /app/storage
+      sizeGB: 5
+
   - type: worker
     name: chatwoot-worker
     runtime: docker
