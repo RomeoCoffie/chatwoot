@@ -38,12 +38,12 @@ envVarGroups:
 
 databases:
   - name: chatwoot-db
-    plan: starter
+    plan: free
 
 services:
   - type: keyvalue
     name: chatwoot-redis
-    plan: starter
+    plan: free
     ipAllowList: []  # internal only
 
   - type: web
