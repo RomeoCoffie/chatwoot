@@ -50,7 +50,7 @@ services:
     dockerCommand:
       - /bin/sh
       - -lc
-      - /app/docker/entrypoints/rails.sh && bundle exec rails s -p $PORT -b 0.0.0.0
+      - "/app/docker/entrypoints/rails.sh && bundle exec rails s -p $PORT -b 0.0.0.0"
     envVars:
       - fromGroup: chatwoot-common
       - key: DATABASE_URL
@@ -74,7 +74,7 @@ services:
     dockerCommand:
       - /bin/sh
       - -lc
-      - /app/docker/entrypoints/rails.sh && bundle exec sidekiq -C config/sidekiq.yml
+      - "/app/docker/entrypoints/rails.sh && bundle exec sidekiq -C config/sidekiq.yml"
     envVars:
       - fromGroup: chatwoot-common
       - key: DATABASE_URL
