@@ -46,6 +46,8 @@ services:
     name: chatwoot-web
     runtime: docker
     plan: starter
+    dockerContext: .
+    dockerfilePath: docker/Dockerfile
     healthCheckPath: /
     preDeployCommand: bash -lc "bundle exec rails db:chatwoot_prepare"
     dockerCommand: bash -lc "/app/docker/entrypoints/rails.sh && bundle exec rails s -p $PORT -b 0.0.0.0"
@@ -69,6 +71,8 @@ services:
     name: chatwoot-worker
     runtime: docker
     plan: starter
+    dockerContext: .
+    dockerfilePath: docker/Dockerfile
     dockerCommand: bash -lc "/app/docker/entrypoints/rails.sh && bundle exec sidekiq -C config/sidekiq.yml"
     envVars:
       - fromGroup: chatwoot-common
