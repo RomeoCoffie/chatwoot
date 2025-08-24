@@ -1,4 +1,4 @@
-# render.yaml  (no previews block)
+# render.yaml (no previews block)
 envVarGroups:
   - name: chatwoot-common
     envVars:
@@ -33,7 +33,7 @@ envVarGroups:
 
 databases:
   - name: chatwoot-db
-    plan: free         
+    plan: free
 
 services:
   - type: keyvalue
@@ -46,8 +46,8 @@ services:
     runtime: docker
     plan: starter
     healthCheckPath: /
-    preDeployCommand: "bundle exec rails db:chatwoot_prepare"
-    dockerCommand: "/app/docker/entrypoints/rails.sh && bundle exec rails s -p $PORT -b 0.0.0.0"
+    preDeployCommand: "bundle install"
+    dockerCommand: "/app/docker/entrypoints/rails.sh && bundle exec rails db:chatwoot_prepare && bundle exec rails s -p $PORT -b 0.0.0.0"
     envVars:
       - fromGroup: chatwoot-common
       - key: DATABASE_URL
@@ -59,7 +59,6 @@ services:
           type: keyvalue
           name: chatwoot-redis
           property: connectionString
-
     disk:
       name: chatwoot-uploads
       mountPath: /app/storage
