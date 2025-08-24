@@ -9,7 +9,7 @@ envVarGroups:
       - key: INSTALLATION_ENV
         value: docker
       - key: FRONTEND_URL
-        sync: false
+        value: "https://chatwoot-web-4n4q.onrender.com"
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: RAILS_LOG_TO_STDOUT
@@ -46,7 +46,7 @@ services:
     runtime: docker
     plan: starter
     healthCheckPath: /
-    preDeployCommand: "bundle install"
+    preDeployCommand: "bundle exec rails db:chatwoot_prepare"
     dockerCommand: "bundle exec rails db:chatwoot_prepare && bundle exec rails s -p $PORT -b 0.0.0.0"
     envVars:
       - fromGroup: chatwoot-common
@@ -57,6 +57,16 @@ services:
           type: keyvalue
           name: chatwoot-redis
           property: connectionString
+      - key: POSTGRES_HOST
+        value: "dpg-d2l0ds95pdvs73a6le4g-a"
+      - key: POSTGRES_PORT
+        value: "5432"
+      - key: POSTGRES_DB
+        value: "chatwoot_db_qlmk"
+      - key: POSTGRES_USERNAME
+        value: "chatwoot_db_qlmk_user"
+      - key: POSTGRES_PASSWORD
+        value: "kEUg79ANN4uUt4A4VFKxI6WFGK70NIlP"
     disk:
       name: chatwoot-uploads
       mountPath: /app/storage
