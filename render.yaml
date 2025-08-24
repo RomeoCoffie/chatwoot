@@ -51,9 +51,7 @@ services:
     envVars:
       - fromGroup: chatwoot-common
       - key: DATABASE_URL
-        fromDatabase:
-          name: chatwoot-db
-          property: connectionString
+        value: "postgres://chatwoot_db_qlmk_user:kEUg79ANN4uUt4A4VFKxI6WFGK70NIlP@dpg-d2l0ds95pdvs73a6le4g-a:5432/chatwoot_db_qlmk?sslmode=require" 
       - key: REDIS_URL
         fromService:
           type: keyvalue
@@ -72,29 +70,19 @@ services:
     envVars:
       - fromGroup: chatwoot-common
       - key: DATABASE_URL
-        fromDatabase:
-          name: chatwoot-db
-          property: connectionString
+        value: "postgres://chatwoot_db_qlmk_user:kEUg79ANN4uUt4A4VFKxI6WFGK70NIlP@dpg-d2l0ds95pdvs73a6le4g-a:5432/chatwoot_db_qlmk?sslmode=require"
       - key: REDIS_URL
         fromService:
           type: keyvalue
           name: chatwoot-redis
           property: connectionString
       - key: POSTGRES_HOST
-        fromDatabase:
-          name: chatwoot-db
-          property: host
-      - key: POSTGRES_DB
-        fromDatabase:
-          name: chatwoot-db
-          property: database
-      - key: POSTGRES_USERNAME
-        fromDatabase:
-          name: chatwoot-db
-          property: user
-      - key: POSTGRES_PASSWORD
-        fromDatabase:
-          name: chatwoot-db
-          property: password
+        value: "dpg-d2l0ds95pdvs73a6le4g-a"
       - key: POSTGRES_PORT
         value: "5432"
+      - key: POSTGRES_DB
+        value: "chatwoot_db_qlmk"
+      - key: POSTGRES_USERNAME
+        value: "chatwoot_db_qlmk_user"
+      - key: POSTGRES_PASSWORD
+        value: "kEUg79ANN4uUt4A4VFKxI6WFGK70NIlP"
