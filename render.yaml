@@ -33,7 +33,7 @@ envVarGroups:
 
 databases:
   - name: chatwoot-db
-    plan: free         # you can change to starter later
+    plan: free         
 
 services:
   - type: keyvalue
@@ -59,24 +59,6 @@ services:
           type: keyvalue
           name: chatwoot-redis
           property: connectionString
-      - key: POSTGRES_HOST
-        fromDatabase:
-          name: chatwoot-db
-          property: host
-      - key: POSTGRES_DB
-        fromDatabase:
-          name: chatwoot-db
-          property: database
-      - key: POSTGRES_USERNAME
-        fromDatabase:
-          name: chatwoot-db
-          property: user
-      - key: POSTGRES_PASSWORD
-        fromDatabase:
-          name: chatwoot-db
-          property: password
-      - key: POSTGRES_PORT
-        value: "5432"
 
     disk:
       name: chatwoot-uploads
@@ -99,22 +81,3 @@ services:
           type: keyvalue
           name: chatwoot-redis
           property: connectionString
-      - key: POSTGRES_HOST
-        fromDatabase:
-          name: chatwoot-db
-          property: host
-      - key: POSTGRES_DB
-        fromDatabase:
-          name: chatwoot-db
-          property: database
-      - key: POSTGRES_USERNAME
-        fromDatabase:
-          name: chatwoot-db
-          property: user
-      - key: POSTGRES_PASSWORD
-        fromDatabase:
-          name: chatwoot-db
-          property: password
-      - key: POSTGRES_PORT
-        value: "5432"
-
