@@ -9,7 +9,7 @@ envVarGroups:
       - key: INSTALLATION_ENV
         value: docker
       - key: FRONTEND_URL
-        value: "https://chatwoot-web-4n4q.onrender.com"
+        sync: false
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: RAILS_LOG_TO_STDOUT
