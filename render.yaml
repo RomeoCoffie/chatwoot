@@ -46,8 +46,8 @@ services:
     runtime: docker
     plan: starter
     healthCheckPath: /
-    preDeployCommand: "bundle exec rails db:chatwoot_prepare"
-    dockerCommand: "/app/docker/entrypoints/rails.sh"
+    preDeployCommand: "bundle install"
+    dockerCommand: "bundle exec rails db:chatwoot_prepare && bundle exec rails s -p $PORT -b 0.0.0.0"
     envVars:
       - fromGroup: chatwoot-common
       - key: DATABASE_URL
@@ -59,24 +59,6 @@ services:
           type: keyvalue
           name: chatwoot-redis
           property: connectionString
-      - key: POSTGRES_HOST
-        fromDatabase:
-          name: chatwoot-db
-          property: host
-      - key: POSTGRES_DB
-        fromDatabase:
-          name: chatwoot-db
-          property: database
-      - key: POSTGRES_USERNAME
-        fromDatabase:
-          name: chatwoot-db
-          property: user
-      - key: POSTGRES_PASSWORD
-        fromDatabase:
-          name: chatwoot-db
-          property: password
-      - key: POSTGRES_PORT
-        value: "5432"
     disk:
       name: chatwoot-uploads
       mountPath: /app/storage
