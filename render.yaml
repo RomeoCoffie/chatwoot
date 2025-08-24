@@ -59,6 +59,25 @@ services:
           type: keyvalue
           name: chatwoot-redis
           property: connectionString
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: chatwoot-db
+          property: host
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: chatwoot-db
+          property: database
+      - key: POSTGRES_USERNAME
+        fromDatabase:
+          name: chatwoot-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: chatwoot-db
+          property: password
+      - key: POSTGRES_PORT
+        value: "5432"
+
     disk:
       name: chatwoot-uploads
       mountPath: /app/storage
@@ -80,3 +99,22 @@ services:
           type: keyvalue
           name: chatwoot-redis
           property: connectionString
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: chatwoot-db
+          property: host
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: chatwoot-db
+          property: database
+      - key: POSTGRES_USERNAME
+        fromDatabase:
+          name: chatwoot-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: chatwoot-db
+          property: password
+      - key: POSTGRES_PORT
+        value: "5432"
+
