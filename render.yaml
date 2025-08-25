@@ -1,4 +1,5 @@
 # render.yaml (no previews block)
+
 envVarGroups:
   - name: chatwoot-common
     envVars:
@@ -46,27 +47,20 @@ services:
     runtime: docker
     plan: starter
     healthCheckPath: /
-    #preDeployCommand: "bundle exec rails db:chatwoot_prepare"
-    dockerCommand: /bin/sh -c "/app/docker/entrypoints/rails.sh bundle exec rails s -p $PORT -b 0.0.0.0"
+    # Enable this AFTER the DB is healthy:
+    preDeployCommand: "bundle exec rails db:chatwoot_prepare"
+    dockerCommand: "/bin/sh -lc 'bundle exec rails s -p $PORT -b 0.0.0.0'"
     envVars:
       - fromGroup: chatwoot-common
       - key: DATABASE_URL
-        value: "postgres://chatwoot_db_qlmk_user:kEUg79ANN4uUt4A4VFKxI6WFGK70NIlP@dpg-d2l0ds95pdvs73a6le4g-a:5432/chatwoot_db_qlmk?sslmode=require" 
+        fromDatabase:
+          name: chatwoot-db
+          property: connectionString
       - key: REDIS_URL
         fromService:
           type: keyvalue
           name: chatwoot-redis
           property: connectionString
-      - key: POSTGRES_HOST
-        value: "dpg-d2l0ds95pdvs73a6le4g-a"
-      - key: POSTGRES_PORT
-        value: "5432"
-      - key: POSTGRES_DB
-        value: "chatwoot_db_qlmk"
-      - key: POSTGRES_USERNAME
-        value: "chatwoot_db_qlmk_user"
-      - key: POSTGRES_PASSWORD
-        value: "kEUg79ANN4uUt4A4VFKxI6WFGK70NIlP"
     disk:
       name: chatwoot-uploads
       mountPath: /app/storage
@@ -76,23 +70,16 @@ services:
     name: chatwoot-worker
     runtime: docker
     plan: starter
-    dockerCommand: "/bin/sh -lc 'bundle exec rails db:seed --trace && bundle exec rails db:migrate --trace && echo DB_ready && sleep 600'"
+    # Normal Sidekiq command:
+    dockerCommand: "/bin/sh -lc 'bundle exec sidekiq -C config/sidekiq.yml'"
     envVars:
       - fromGroup: chatwoot-common
       - key: DATABASE_URL
-        value: "postgres://chatwoot_db_qlmk_user:kEUg79ANN4uUt4A4VFKxI6WFGK70NIlP@dpg-d2l0ds95pdvs73a6le4g-a:5432/chatwoot_db_qlmk?sslmode=require"
+        fromDatabase:
+          name: chatwoot-db
+          property: connectionString
       - key: REDIS_URL
         fromService:
           type: keyvalue
           name: chatwoot-redis
           property: connectionString
-      - key: POSTGRES_HOST
-        value: "dpg-d2l0ds95pdvs73a6le4g-a"
-      - key: POSTGRES_PORT
-        value: "5432"
-      - key: POSTGRES_DB
-        value: "chatwoot_db_qlmk"
-      - key: POSTGRES_USERNAME
-        value: "chatwoot_db_qlmk_user"
-      - key: POSTGRES_PASSWORD
-        value: "kEUg79ANN4uUt4A4VFKxI6WFGK70NIlP"
