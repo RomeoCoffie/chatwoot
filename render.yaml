@@ -46,7 +46,7 @@ services:
     runtime: docker
     plan: starter
     healthCheckPath: /
-    preDeployCommand: "bundle exec rails db:chatwoot_prepare"
+    #preDeployCommand: "bundle exec rails db:chatwoot_prepare"
     dockerCommand: /bin/sh -c "/app/docker/entrypoints/rails.sh bundle exec rails s -p $PORT -b 0.0.0.0"
     envVars:
       - fromGroup: chatwoot-common
