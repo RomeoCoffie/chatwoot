@@ -1,1 +1,1 @@
-FROM chatwoot/chatwoot:v4.0.0
+FROM chatwoot/chatwoot:v4.5.2
