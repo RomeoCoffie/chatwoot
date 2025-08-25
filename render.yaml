@@ -53,14 +53,22 @@ services:
     envVars:
       - fromGroup: chatwoot-common
       - key: DATABASE_URL
-        fromDatabase:
-          name: chatwoot-db
-          property: connectionString
+        value: "postgres://chatwoot_db_xap8_user:01NsaSpYin38EvYyB0QrLrTeCxRYwr2Z@dpg-d2luddruibrs73fkr340-a:5432/chatwoot_db_xap8?sslmode=require"
       - key: REDIS_URL
         fromService:
           type: keyvalue
           name: chatwoot-redis
           property: connectionString
+      - key: POSTGRES_HOST
+        value: "dpg-d2luddruibrs73fkr340-a"
+      - key: POSTGRES_PORT
+        value: "5432"
+      - key: POSTGRES_DB
+        value: "chatwoot_db_xap8"
+      - key: POSTGRES_USERNAME
+        value: "chatwoot_db_xap8_user"
+      - key: POSTGRES_PASSWORD
+        value: "01NsaSpYin38EvYyB0QrLrTeCxRYwr2Z"
     disk:
       name: chatwoot-uploads
       mountPath: /app/storage
@@ -75,11 +83,19 @@ services:
     envVars:
       - fromGroup: chatwoot-common
       - key: DATABASE_URL
-        fromDatabase:
-          name: chatwoot-db
-          property: connectionString
+        value: "postgres://chatwoot_db_xap8_user:01NsaSpYin38EvYyB0QrLrTeCxRYwr2Z@dpg-d2luddruibrs73fkr340-a:5432/chatwoot_db_xap8?sslmode=require"
       - key: REDIS_URL
         fromService:
           type: keyvalue
           name: chatwoot-redis
           property: connectionString
+      - key: POSTGRES_HOST
+        value: "dpg-d2luddruibrs73fkr340-a"
+      - key: POSTGRES_PORT
+        value: "5432"
+      - key: POSTGRES_DB
+        value: "chatwoot_db_xap8"
+      - key: POSTGRES_USERNAME
+        value: "chatwoot_db_xap8_user"
+      - key: POSTGRES_PASSWORD
+        value: "01NsaSpYin38EvYyB0QrLrTeCxRYwr2Z"
