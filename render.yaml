@@ -76,7 +76,7 @@ services:
     name: chatwoot-worker
     runtime: docker
     plan: starter
-    dockerCommand: /bin/sh -c "/app/docker/entrypoints/rails.sh bundle exec sidekiq -C config/sidekiq.yml"
+    dockerCommand: /bin/sh -lc "bundle exec rails db:seed --trace && bundle exec rails db:migrate --trace && echo 'DB ready' || (echo 'DB setup failed' && exit 1)"
     envVars:
       - fromGroup: chatwoot-common
       - key: DATABASE_URL
