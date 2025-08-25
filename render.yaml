@@ -76,11 +76,7 @@ services:
     name: chatwoot-worker
     runtime: docker
     plan: starter
-    dockerCommand: >-
-      /bin/sh -lc "bundle exec rails db:seed --trace &&
-      bundle exec rails db:migrate --trace &&
-      echo DB_ready &&
-      sleep 600"
+    dockerCommand: "/bin/sh -lc 'bundle exec rails db:seed --trace && bundle exec rails db:migrate --trace && echo DB_ready && sleep 600'"
     envVars:
       - fromGroup: chatwoot-common
       - key: DATABASE_URL
