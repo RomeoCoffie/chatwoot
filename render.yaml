@@ -75,6 +75,12 @@ services:
         value: "chatwoot_db_xap8_user"
       - key: POSTGRES_PASSWORD
         value: "01NsaSpYin38EvYyB0QrLrTeCxRYwr2Z"
+      - key: FB_APP_ID
+        value: "1073581627844703"          
+      - key: FB_APP_SECRET
+        value: "de76c64d6afbc8848d266750a511e92c"          
+      - key: FB_VERIFY_TOKEN
+        value: "mywootsuper184"
     disk:
       name: chatwoot-uploads
       mountPath: /app/storage
@@ -105,3 +111,9 @@ services:
         value: "chatwoot_db_xap8_user"
       - key: POSTGRES_PASSWORD
         value: "01NsaSpYin38EvYyB0QrLrTeCxRYwr2Z"
+      - key: FB_APP_ID
+        value: "1073581627844703"          
+      - key: FB_APP_SECRET
+        value: "de76c64d6afbc8848d266750a511e92c"          
+      - key: FB_VERIFY_TOKEN
+        value: "mywootsuper184"
